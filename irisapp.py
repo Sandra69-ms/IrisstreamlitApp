@@ -34,11 +34,14 @@ if submitted:
     predicted_class = species_map.get(prediction[0],'Unknown species')
     st.success(f"The predicted Iris species is: {predicted_class}")
 
-    if predicted_class == "Iris-setosa":
-        st.image("images/irissetosa.jpg", caption="Iris-Setosa", use_container_width=True)
-    elif predicted_class == "Iris-versicolor":
-        st.image("images/irisversicolor.jpg", caption="Iris-Versicolor", use_container_width=True)
-    elif predicted_class == "Iris-virginica":
-        st.image("images/irisvirginica.jpeg", caption="Iris-Virginica", use_container_width=True)
+    species_images = {
+        "Iris-setosa": "image/setosa.jpg",
+        "Iris-versicolor": "image/versicolor.jpg",
+        "Iris-virginica": "image/virginica.jpeg"
+    }
+
+    image_path = species_images.get(predicted_class)
+    if image_path:
+        st.image(image_path, caption=predicted_class, use_container_width=True)
     else:
-        st.warning("No image available for this prediction.")
+        st.warning("No image available for this species.")
